@@ -509,13 +509,13 @@ var vm = new Vue({
         setComment:function(ratio){
             //设置最后的评语
             var ratioText = ratio*100 + '%';
-            if(0<=this.rightNums<4){
+            if(this.rightNums>=0 && this.rightNums<4){
                 this.comment = '您已經擊敗了全國'+ratioText+'的對手，大師作品是什麼，他認識我，可我不認識他';
-            } else if(4<=this.rightNums<6) {
+            } else if(this.rightNums>=4 && this.rightNums<6) {
                 this.comment = '您已經擊敗了全國'+ratioText+'的對手，一臉萌比不會做您已经击败了全国40%的对手，一脸萌比不会做。';
-            } else if(6<=this.rightNums<8) {
+            } else if(this.rightNums>=6 && this.rightNums<8) {
                 this.comment = '您已經擊敗了全國'+ratioText+'的對手，不要小看自己，不信讓同學來答題哦。';
-            }else if(8<=this.rightNums<10) {
+            }else if(this.rightNums>=8 && this.rightNums<10) {
                 this.comment = '您已經擊敗了全國'+ratioText+'的對手，沒想到是這樣的大師作品';
             }else {
                 this.comment = '你是建築圈百曉生麼？建築圈無人不知，無人不曉';
@@ -523,13 +523,13 @@ var vm = new Vue({
         },
         setShareTitle:function(shareTitle){
             //设置分享title
-            if(0<=this.rightNums<4){
+            if(this.rightNums>=0 && this.rightNums<4){
                 shareTitle = '我在建筑大师游戏中答对了' + this.rightNums +'道题，大师作品是什么，他认识我，可我不认识他';
-            } else if(4<=this.rightNums<6) {
+            } else if(this.rightNums>=4 && this.rightNums<6) {
                 shareTitle = '我在建筑大师游戏中答对了' + this.rightNums +'道题，一脸萌比，不会做';
-            } else if(6<=this.rightNums<8) {
+            } else if(this.rightNums>=6 && this.rightNums<8) {
                 shareTitle = '我在建筑大师游戏中答对了' + this.rightNums +'道题，不要小看我，不信你来答。';
-            }else if(8<=this.rightNums<10) {
+            } else if(this.rightNums>=8 && this.rightNums<10) {
                 shareTitle = '我在建筑大师游戏中答对了' + this.rightNums +'道题，没想到是这样的大师作品。';
             }else {
                 shareTitle = '哈哈哈，我在建筑大师游戏中答对了10道题，建筑圈百晓生就是在下。';
