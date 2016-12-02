@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>建築大師</title>
+    <link rel="stylesheet" href="page.css">
+    <script src="jweixin-1.0.0.js"></script>
+</head>
+
+<body>
+    <div class="container page-wrap" id="app">
+        <div class="first-page page" data-lock-next="true" data-lock-prev="true">
+             <div class="text-wrapper">
+                 <p class="text-title">測試你的建築師潛意識</p>
+            </div>
+            <div class="firstpage-text-wrapper">
+                 <p class="firstpage-text">你了解建築大師的作品麼</p>
+                 <p class="firstpage-text">這裡會讓你的得到答案</p>
+                 <p class="firstpage-text">來試一下</p>
+            </div>
+                
+            <div class="submit-zone">
+                <a id="first-next">开始游戏</a>
+            </div>
+        </div>
+        <template v-for="(item,index) in displayItems">
+            <div class="content-page page" data-lock-next="true" data-lock-prev="true">
+                <div class="text-wrapper">
+                    <p class="text-title">測試你的建築師潛意識</p>
+                </div>
+                <div class="portrait-wrapper" v-bind:style="{ backgroundImage: 'url('+item.portraitPicUrl+')' }">
+                </div>
+                <div class="text-wrapper">
+                    <p class="text-question">{{index + 1}}、 {{item.portraitQues}}</p>
+                </div>
+                <div class="option-wrapper">
+                    <ul>
+                        <li v-bind:style="{ backgroundImage: 'url('+item.optionUrlA+')' }">
+                            <input type="radio" :id="'A'+index" :value="item.aValue" v-model="item.answer">
+                            <label :for="'A'+index"></label>
+                        </li>
+                        <li v-bind:style="{ backgroundImage: 'url('+item.optionUrlB+')' }">
+                            <input type="radio" :id="'B'+index" :value="item.bValue" v-model="item.answer">
+                            <label :for="'B'+index"></label>
+                        </li>
+                        <li v-bind:style="{ backgroundImage: 'url('+item.optionUrlC+')' }">
+                            <input type="radio" :id="'C'+index" :value="item.cValue" v-model="item.answer">
+                            <label :for="'C'+index"></label>
+                        </li>
+                        <li v-bind:style="{ backgroundImage: 'url('+item.optionUrlD+')' }">
+                            <input type="radio" :id="'D'+index" :value="item.dValue" v-model="item.answer">
+                            <label :for="'D'+index"></label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="submit-zone">
+                    <!--判断是否是最后一题，来决定提交与否-->
+                    <a :class="{disablebutton:item.answer<0}" @click.prevent="next" v-if="index != 9">下一題</a>
+                    <a :class="{disablebutton:item.answer<0}" @click.prevent="submit()" v-else>提交</a>
+                    <p>確認提交后將無法修改答案</p>
+                </div>
+            </div>
+        </template>
+        <div class="page last-page" data-lock-next="true" data-lock-prev="true">
+            <div class="text-wrapper">
+                <p class="text-title">測試你的建築師潛意識</p>
+            </div>
+            <div class="portrait-wrapper" style="background-image:url('http://og4jdajcq.bkt.clouddn.com/fengmian-last.jpg')">
+                <p class="score-name">恭喜你</p>
+                <p class="score-dscpt">你的測試得分為<span>{{rightNums*10}}</span>分</p>
+            </div>
+            <div class="text-wrapper">
+                <p class="text-question">測試結果</p>
+            </div>
+            <div class="comment-wrapper">
+                <p class="comment-head">下面是你的測試結果</p>
+                <p class="comment-content">你對<span>{{rightNames}}</span>的作品了解頗深</p>
+                <p class="comment-content">你對<span>{{wrongNames}}</span>的作品了解還不夠，仍需努力。</p>
+                <p class="comment-content">{{comment}}</p>
+                
+            </div>
+            <div class="submit-zone">
+                <!--判断是否是最后一题，来决定提交与否-->
+                <a href="#">再玩一次</a>
+                <p>發揮失常，想再玩一次麼</p>
+                <p>分享給你的朋友一起來玩，看看大家的分數</p>
+            </div>
+        </div>
+    </div>
+    <div id="jsonp"></div>
+</body>
+<script src="vue.js"></script>
+<script src="page.js"></script>
+<script src="zepto_modify.js"></script>
+<script src="PageSlider.js"></script>
+<script>
+//slide
+    var nextPage = new PageSlider({
+        pages: $('.page-wrap .page'),
+        // dev:11
+    });
+    $('#first-next').on('tap', function(){
+        nextPage.next();
+    });
+</script>
+
+</html>
